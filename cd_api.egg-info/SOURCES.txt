@@ -1,3 +1,4 @@
+README.md
 setup.py
 cdApi/__init__.py
 cdApi/auth.py
