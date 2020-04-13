@@ -1,6 +1,6 @@
 rd build /Q /S
 rd dist /Q /S
-rd cj_api.egg-info /Q /S
+rd cd_api.egg-info /Q /S
 
 git add -A
 git commit -m "1.0.4 增加用户readme"
