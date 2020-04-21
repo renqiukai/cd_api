@@ -5,7 +5,7 @@
 @版本    :1.0
 '''
 
-from .base import base, getToken
+from .base import base
 
 
 class coupon(base):
