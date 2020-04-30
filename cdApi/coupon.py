@@ -1,11 +1,16 @@
 '''
+@Author: Rqk
+@Date: 2020-04-26 15:01:20
+@Description: 
+'''
+'''
 @说明    :优惠券接口。
 @时间    :2020/3/19 下午4:51:48
 @作者    :任秋锴
 @版本    :1.0
 '''
 
-from .base import base, getToken
+from .base import base
 
 
 class coupon(base):
