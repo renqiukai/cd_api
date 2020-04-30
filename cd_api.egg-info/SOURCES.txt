@@ -1,13 +1,16 @@
+README.md
 setup.py
 cdApi/__init__.py
 cdApi/auth.py
 cdApi/base.py
 cdApi/coupon.py
+cdApi/coupon_pack.py
 cdApi/discount.py
 cdApi/live.py
 cdApi/order.py
 cdApi/product.py
 cdApi/store.py
+cdApi/store_product.py
 cdApi/task.py
 cdApi/token_api.py
 cd_api.egg-info/PKG-INFO
