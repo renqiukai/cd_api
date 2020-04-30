@@ -4,11 +4,14 @@
 @Description: 
 '''
 from cdApi.coupon_pack import couponPack
+from cdApi.product import product
 
 if __name__ == "__main__":
-    token = "6733e135-9db9-4ca3-9b57-b06d18fbc5d5"
-    c = couponPack(token)
-    info = c.read(170)
-    info["couponList"][0]["number"] = 10
-    print(info)
+    token = "490d3291-c9c6-4792-b11e-f7d9c01960b9"
+    c = product(token)
+    info = c.read(28710)
+    # info["couponList"][0]["number"] = 10
+    # print(info)
+    info["categoryList"] = [{"id": 1022}, {"id": 2416}, {
+        "id": 2420}, {"id": 505}, {"id": 549}, {"id": 550}]
     print(c.update(info))

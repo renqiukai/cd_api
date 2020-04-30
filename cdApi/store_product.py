@@ -1,6 +1,6 @@
 '''
 @Author: Rqk
-@Date: 2020-04-26 15:01:20
+@Date: 2020-04-30 14:08:52
 @Description: 
 '''
 '''
@@ -10,19 +10,19 @@
 @版本    :1.0
 '''
 
-
-
-
 from .base import base
-class product(base):
+
+
+class storeProduct(base):
     def __init__(self, token):
         super().__init__(token)
 
-    def list(self, productCode=None, specCode=None, name=None,
-             storeStatus=None, categoryIds=None, pageNum=1, pageSize=10):
-        api_name = "manager/product/list"
+    def list(self, productCode=None, companyId=None, specCode=None, name=None,
+                  storeStatus=None, categoryIds=None, pageNum=1, pageSize=10):
+        api_name = "manager/storeproduct/list"
         data = {
             "productCode": productCode,
+            "companyId": companyId,
             "specCode": specCode,
             "name": name,
             "storeStatus": storeStatus,
@@ -30,7 +30,7 @@ class product(base):
             "pageNum": pageNum,
             "pageSize": pageSize
         }
-        result = self.request(api_name, data, method="POST")
+        result = self.request(api_name, data, method="GET")
         status = result.get("status")
         if status == 200:
             return result.get("data").get("dataList")
@@ -38,7 +38,7 @@ class product(base):
             print(result)
 
     def create(self, name, specCode):
-        api_name = "manager/product/add"
+        api_name = "manager/storeproduct/add"
         data = {
             "name": name,
             "categoryList":
@@ -78,15 +78,10 @@ class product(base):
         data = {
             "id": _id
         }
-        result = self.request(url, data)
-        status = result.get("status")
-        if status == 200:
-            data = result.get("data")
-            return data
+        return self.request(url, data)
 
-    def update(self, data):
-        url = "manager/product/update"
-        return self.request(url, data, method="POST")
+    def update(self):
+        pass
 
     def delete(self):
         pass
