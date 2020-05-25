@@ -19,7 +19,7 @@ class base:
             "pre": "apipre",
             "api": "api",
         }
-        host_name = f"http://{env_conf[self.env]}.icaodong.com/"
+        host_name = f"https://{env_conf[self.env]}.icaodong.com/"
         headers = {
             "token": self.token
         }
