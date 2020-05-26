@@ -1,19 +1,13 @@
 '''
-@Author: Rqk
-@Date: 2020-04-26 15:01:20
-@Description: 
-'''
-'''
 @说明    :商品接口。
 @时间    :2020/2/13 下午4:28:26
 @作者    :任秋锴
 @版本    :1.0
 '''
 
-
-
-
 from .base import base
+
+
 class product(base):
     def __init__(self, token):
         super().__init__(token)

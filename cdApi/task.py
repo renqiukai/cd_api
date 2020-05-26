@@ -53,12 +53,6 @@ class task(base):
         }
         return self.update(data)
 
-    def updateGPS(self, _id, lat, lng):
-        data = self.read(_id)
-        data = data.get("data")
-        data["longitude"] = lng
-        data["latitude"] = lat
-        self.update(data)
 
     def delete(self):
         pass
