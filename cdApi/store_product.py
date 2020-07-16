@@ -72,7 +72,7 @@ class storeProduct(base):
         return self.request(api_name, data, method="POST")
 
     def read(self, _id):
-        url = "manager/product/info"
+        url = "manager/storeproduct/info"
         data = {
             "id": _id
         }
