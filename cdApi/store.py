@@ -115,5 +115,11 @@ class store(base):
         data["latitude"] = lat
         self.update(data)
 
+    def update_manager_mobile(self, _id, manager_mobile):
+        data = self.read(_id)
+        data = data.get("data")
+        data["managerMobile"] = manager_mobile
+        self.update(data)
+
     def delete(self):
         pass

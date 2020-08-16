@@ -3,7 +3,7 @@ rd dist /Q /S
 rd cd_api.egg-info /Q /S
 
 git add -A
-git commit -m "1.0.7 修改商品部分"
+git commit -m "增加修改门店售后电话方法"
 git push cd_api master
 
 python setup.py sdist build

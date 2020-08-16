@@ -5,13 +5,9 @@
 '''
 from cdApi.coupon_pack import couponPack
 from cdApi.product import product
+from cdApi.store import store
 
 if __name__ == "__main__":
-    token = "490d3291-c9c6-4792-b11e-f7d9c01960b9"
-    c = product(token)
-    info = c.read(28710)
-    # info["couponList"][0]["number"] = 10
-    # print(info)
-    info["categoryList"] = [{"id": 1022}, {"id": 2416}, {
-        "id": 2420}, {"id": 505}, {"id": 549}, {"id": 550}]
-    print(c.update(info))
+    token = "eee4e7af-74ac-436d-8fb2-87bcd7f305e8"
+    s = store(token=token)
+    s.update_manager_mobile(29561,"13801234567")
