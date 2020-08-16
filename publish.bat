@@ -4,7 +4,7 @@ rd cd_api.egg-info /Q /S
 
 git add -A
 git commit -m "增加修改门店售后电话方法"
-git push cd_api master
+git push github master
 
 python setup.py sdist build
 twine upload dist/*
