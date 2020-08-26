@@ -6,10 +6,10 @@
 
 from setuptools import setup, find_packages  # 这个包没有的可以pip一下
 # import rqk_cd_api
-
+version = "1.1.3"
 setup(
     name="cd_api",  # 这里是pip项目发布的名称
-    version="1.1.1",  # 版本号，数值大的会优先被pip
+    version=version,  # 版本号，数值大的会优先被pip
     keywords=["cdApi", "cd", "rqk"],
     description="任秋锴的草动工具箱",
     long_description="任秋锴的草动工具箱",
