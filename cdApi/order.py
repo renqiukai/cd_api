@@ -13,7 +13,7 @@ class order(base):
         super().__init__(token)
 
     def list(self, pageNum=1, pageSize=10):
-        api_name = "manager/store/get_sysuser_store_tree"
+        api_name = "manager/order/list"
         data = {
             "pageNum": pageNum,
             "pageSize": pageSize,
@@ -21,7 +21,7 @@ class order(base):
         return self.request(api_name, data)
 
     def sync(self, order_code):
-        # 向客户同步销售订单 
+        # 向客户同步销售订单
         api_name = "manager/order/order_invoice"
         data = {"orderCodes": order_code}
         return self.request(api_name, data, method="POST")
@@ -34,55 +34,20 @@ class order(base):
             data["type"] = type
         return self.request(api_name, data, method="POST")
 
-    def create(self, data):
-        api_name = ""
-        return self.request(api_name, data, method="POST")
-
-    def read(self, _id):
-        api_name = "manager/store/info"
+    def read(self, order_code):
+        api_name = "manager/order/info"
         data = {
-            "id": _id,
+            "orderCode": order_code,
         }
         response = self.request(api_name, data, method="GET")
-        # print(response)
         return response
 
-    def update(self, data):
-        api_name = "manager/store/update"
-        response = self.request(api_name, data, method="POST")
-        # print(response)
-        return self.response(response)
-
-    def updateDemo(self):
+    def bind_order_emp(self, order_code, emp_id):
+        # 订单绑定导购方法
+        api_name = "manager/order/bind_order_emp"
         data = {
-            'logoUrl': "",
-            'storeCode': "",
-            'storeType': 0,
-            'address': "上海市浦东新区浦东南路2250号",
-            'province': "上海市",
-            'city': "上海市",
-            'area': "浦东新区",
-            'longitude': "123.51",
-            'latitude': "31.20",
-            'level': 2,
-            'managerMobile': "",
-            'managerName': "",
-            'name': "测试店（滨江）",
-            'parentId': 10269,
-            'type': 0,
-            'takeStatus': 0,
-            'accountId': None,
-            'regionValue': ["上海市", "上海市", "浦东新区"],
+            "orderCode": order_code,
+            "empId": emp_id
         }
-        _id = 10270
-        self.update(_id, data)
-
-    def updateGPS(self, _id, lat, lng):
-        data = self.read(_id)
-        data = data.get("data")
-        data["longitude"] = lng
-        data["latitude"] = lat
-        self.update(data)
-
-    def delete(self):
-        pass
+        response = self.request(api_name, data, method="POST")
+        return self.response(response)

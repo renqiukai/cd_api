@@ -31,9 +31,6 @@ class base:
             response = requests.post(url, json=data, headers=headers)
         else:
             raise ValueError("网络请求方法错误。")
-        # 测试
-        # print(url, data, headers, method)
-        # print(response)
         if response.status_code == 200:
             return response.json()
 
