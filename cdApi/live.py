@@ -20,31 +20,25 @@ class live(base):
         }
         return self.request(api_name, data)
 
-    def sync(self, order_code):
-        api_name = "manager/order/order_invoice"
-        data = {"orderCodes": order_code}
-        return self.request(api_name, data, method="POST")
-
-    def create(self, data):
-        api_name = ""
+    def sync(self, data):
+        api_name = "manager/live_room/sync"
         return self.request(api_name, data, method="POST")
 
     def read(self, _id):
-        api_name = "manager/store/info"
+        api_name = "manager/live_room/info"
         data = {
-            "id": _id,
+            "LiveRoomId": _id,
         }
         response = self.request(api_name, data, method="GET")
-        # print(response)
         return response
 
     def update(self, data):
         api_name = "manager/live_room/update"
         response = self.request(api_name, data, method="POST")
-        print(response)
-        # return self.response(response)
+        return self.response(response)
 
     def updateDemo(self):
+        # 直播室可见门店编辑
         data = {
             "id": 230,
             "storeList": [
@@ -53,12 +47,7 @@ class live(base):
         }
         return self.update(data)
 
-    def updateGPS(self, _id, lat, lng):
-        data = self.read(_id)
-        data = data.get("data")
-        data["longitude"] = lng
-        data["latitude"] = lat
-        self.update(data)
-
     def delete(self):
-        pass
+        api_name = "manager/live_room/delete"
+        response = self.request(api_name, method="GET")
+        return self.response(response)

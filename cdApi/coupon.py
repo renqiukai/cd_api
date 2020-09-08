@@ -1,37 +1,38 @@
 '''
-@Author: Rqk
-@Date: 2020-04-26 15:01:20
-@Description: 
-'''
-'''
 @说明    :优惠券接口。
 @时间    :2020/3/19 下午4:51:48
 @作者    :任秋锴
 @版本    :1.0
 '''
 
+
+
+
 from .base import base
-
-
 class coupon(base):
     def __init__(self, token):
         super().__init__(token)
 
-    def list(self, pageNum=1, pageSize=10):
-        api_name = "manager/live_room/list"
+    def list(self,
+             couponType=None, distType=None,
+             storeId=None, companyId=None,
+             name=None, type=0,
+             pageNum=1, pageSize=10):
+        """
+        - couponType:优惠券类型 1/3/4/5
+        - distType:发放方式 1/2/3/4
+        - name:优惠券名称
+        - type:优惠券状态，全部0/未开始1/进行中2/已结束3/
+        """
+        api_name = "manager/coupon/list"
         data = {
             "pageNum": pageNum,
             "pageSize": pageSize,
         }
         return self.request(api_name, data)
 
-    def sync(self, order_code):
-        api_name = "manager/order/order_invoice"
-        data = {"orderCodes": order_code}
-        return self.request(api_name, data, method="POST")
-
     def create(self, data):
-        api_name = ""
+        api_name = "manager/coupon/add"
         return self.request(api_name, data, method="POST")
 
     def read(self, _id):
@@ -40,14 +41,12 @@ class coupon(base):
             "id": _id,
         }
         response = self.request(api_name, data, method="GET")
-        # print(response)
         return self.response(response)
 
     def update(self, data):
         api_name = "manager/coupon/edit"
         response = self.request(api_name, data, method="POST")
-        print(response)
-        # return self.response(response)
+        return self.response(response)
 
     def updateDemo(self):
         data = {
@@ -58,7 +57,8 @@ class coupon(base):
         }
         return self.update(data)
 
-
-    def delete(self):
-        pass
-
+    def delete(self, _id):
+        api_name = "manager/coupon/discard"
+        data = {"id": _id}
+        response = self.request(api_name, data, method="POST")
+        return self.response(response)

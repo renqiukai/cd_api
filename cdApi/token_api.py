@@ -64,3 +64,12 @@ class Token:
                     acc=acc,
                     pwd=pwd,
                     acc_type=acc_type)
+
+
+def testcase():
+    t = Token()
+    t.get(508, "13801587423", "cd123456")
+
+
+if __name__ == "__main__":
+    testcase()

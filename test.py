@@ -3,7 +3,6 @@
 @Date: 2020-04-26 15:01:20
 @Description: 
 '''
-from logging import log
 from cdApi.coupon_pack import couponPack
 from cdApi.product import product
 from cdApi.user import user

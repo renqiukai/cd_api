@@ -1,9 +1,4 @@
 '''
-@Author: Rqk
-@Date: 2020-04-26 15:01:20
-@Description: 
-'''
-'''
 @说明    :商品接口。
 @时间    :2020/2/13 下午4:28:26
 @作者    :任秋锴
@@ -11,9 +6,9 @@
 '''
 
 
-
-
 from .base import base
+
+
 class product(base):
     def __init__(self, token):
         super().__init__(token)
@@ -37,8 +32,11 @@ class product(base):
         else:
             print(result)
 
-    def create(self, name, specCode):
+    def create(self, data):
         api_name = "manager/product/add"
+        return self.request(api_name, data, method="POST")
+
+    def create_demo(self, name, specCode):
         data = {
             "name": name,
             "categoryList":
@@ -71,7 +69,7 @@ class product(base):
             "commissionRulesDTO": {"empAmount": "", "empPercent": "", "empType": 1, "empSwitch": 0, "id": ""},
             "expressFree": 1, "attributeList": [
                 {"key": "颜色", "value": [{"values": "红色", "img": "https://cdqn.icaodong.com/image/100_1577429535111_44253476.png"}], "isShow": 1}, {"key": "尺寸", "value": [{"values": "150cm", "img": ""}], "isShow": 1}], "specificationList": [{"id": "", "imgUrl": "https://cdqn.icaodong.com/image/100_1577429535111_44253476.png", "inventory": "100", "prePrice": "100", "price": "100", "specCode": specCode, "specContent": "红色，150cm", "status": 1}], "batch": {"prePrice": "100", "price": "100", "inventory": "100"}, "isVip": 1}
-        return self.request(api_name, data, method="POST")
+        return self.create(data)
 
     def read(self, _id):
         url = "manager/product/info"
@@ -90,8 +88,3 @@ class product(base):
 
     def delete(self):
         pass
-
-    def updatebatchproduct(self, _id, price):
-        api_name = "manager/storeproduct/updatebatchproduct"
-        data = {"pidList": [_id], "price": price}
-        return self.request(api_name, data, method="POST")

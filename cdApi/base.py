@@ -5,6 +5,7 @@
 @版本    :1.0
 '''
 import requests
+from loguru import logger
 
 
 class base:
@@ -24,7 +25,6 @@ class base:
             "token": self.token
         }
         url = f"{host_name}{api_name}"
-        # print(url)
         if method == "GET":
             response = requests.get(url, params=data, headers=headers)
         elif method == "POST":
@@ -39,4 +39,5 @@ class base:
         if status == 200:
             return response_json.get("data")
         else:
-            print(response_json)
+            response_str = f"请求失败：{response_json}"
+            raise ValueError(response_str)

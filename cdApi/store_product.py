@@ -35,40 +35,8 @@ class storeProduct(base):
         else:
             print(result)
 
-    def create(self, name, specCode):
+    def create(self, data):
         api_name = "manager/storeproduct/add"
-        data = {
-            "name": name,
-            "categoryList":
-            [
-                {"id": 1},
-                {"id": 4},
-                {"id": 7},
-                {"id": 6},
-                {"id": 8},
-                {"id": 21},
-                {"id": 52},
-                {"id": 12},
-                {"id": 5},
-                {"id": 10},
-                {"id": 11},
-                {"id": 20}
-            ],
-            "labelList": [{"id": 78}],
-            "materialMainList": [{"id": 14139, "rank": 1}],
-            "materialnotMainList": [{"id": 14138}],
-            "details": "测试测试",
-            "showImages": "",
-            "productCode": "",
-            "weight": "11",
-            "volume": "1",
-            "virtualTotal": "1",
-            "type": 1,
-            "status": 0,
-            "isOpen": 0,
-            "commissionRulesDTO": {"empAmount": "", "empPercent": "", "empType": 1, "empSwitch": 0, "id": ""},
-            "expressFree": 1, "attributeList": [
-                {"key": "颜色", "value": [{"values": "红色", "img": "https://cdqn.icaodong.com/image/100_1577429535111_44253476.png"}], "isShow": 1}, {"key": "尺寸", "value": [{"values": "150cm", "img": ""}], "isShow": 1}], "specificationList": [{"id": "", "imgUrl": "https://cdqn.icaodong.com/image/100_1577429535111_44253476.png", "inventory": "100", "prePrice": "100", "price": "100", "specCode": specCode, "specContent": "红色，150cm", "status": 1}], "batch": {"prePrice": "100", "price": "100", "inventory": "100"}, "isVip": 1}
         return self.request(api_name, data, method="POST")
 
     def read(self, _id):
@@ -89,8 +57,8 @@ class storeProduct(base):
         api_name = "manager/storeproduct/updatebatchproduct"
         data = {"pidList": [_id], "price": price}
         return self.request(api_name, data, method="POST")
-    
-    def update_price(self, store_product_id, price,spec_code=None):
+
+    def update_price(self, store_product_id, price, spec_code=None):
         data = self.read(store_product_id)
         data = data.get("data")
         if data:
