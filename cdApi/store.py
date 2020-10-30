@@ -5,6 +5,7 @@
 @版本    :1.0
 '''
 
+from loguru import logger
 from .base import base
 
 
@@ -18,7 +19,7 @@ class store(base):
             "pageNum": pageNum,
             "pageSize": pageSize,
         }
-        return self.request(api_name, data)
+        return self.request(api_name, data, method="POST")
 
     def getCompanyList(self):
         result = self.list()
@@ -123,3 +124,18 @@ class store(base):
 
     def delete(self):
         pass
+
+    def code2id(self):
+        """
+        ### 此方法得到一个code和id对应的大字典来查找对应的值。
+        """
+        result = {}
+        for data in self.getStoreList():
+            store_code = data.get("store_code")
+            store_id = data.get("store_id")
+            company_id = data.get("store_parent_id")
+            result[store_code] = {
+                "store_id": store_id,
+                "company_id": company_id,
+            }
+        return result

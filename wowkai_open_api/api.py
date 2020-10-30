@@ -85,11 +85,12 @@ class wowkaiApi:
                    emp_name=None,
                    emp_phone=None,
                    shop_code=None,
+                   emp_type=1,
                    ):
         data = {
             "method": "cd.shop.guide.sync",
             "time": str(int(time.time()*1000)),
-            "emp_type": 1
+            "emp_type": emp_type
         }
         if emp_code:
             data["emp_code"] = emp_code
@@ -105,10 +106,11 @@ class wowkaiApi:
 if __name__ == "__main__":
     w = wowkaiApi()
     data = {
-        "emp_code": "13801587423",
-        "emp_name": "任秋锴",
-        "emp_phone": "13801587423",
+        "emp_code": "13811158101",
+        "emp_name": "蘧涛",
+        "emp_phone": "13811158101",
         "shop_code": "O1323087",
+        "emp_type": 0,
     }
     w.guide_sync(**data)
     # logger.debug(w.get_token())

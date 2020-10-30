@@ -20,6 +20,12 @@ class auth(base):
         }
         return self.request(api_name, data)
 
+    def role_list(self):
+        api_name = "manager/role/rolelist"
+        data = {
+        }
+        return self.request(api_name, data)
+
     def getAllData(self, pageNum=1, pageSize=10):
         while 1:
             response = self.list(pageNum, pageSize)
@@ -32,10 +38,44 @@ class auth(base):
                 yield rows
                 return
 
-    def create(self, name, specCode):
-        api_name = ""
+    def create(self, data):
+        """
+        数据样式：
         data = {
-            "id": 10270
+            "name": "任秋锴", 
+            "mobile": "13801587423", 
+            "roleIds": [4], 
+            "status": 1, # 已关闭员工账号
+            "status2": True,# 已关闭员工账号
+            "storeType": 2,
+            "companyId": 77,
+            "companyId2": [], 
+            "storeId": 3, 
+            "storeId2": [], 
+            "storeIds": [77, 3]
+            }
+        """
+        api_name = "manager/sysuser/add"
+        return self.request(api_name, data, method="POST")
+
+    def create_store(self, name, mobile, role_ids: list, company_id, store_id):
+        """
+        # 增加门店账号权限。
+        只支持一个分公司，一个门店
+        """
+        api_name = "manager/sysuser/add"
+        data = {
+            "name": name,
+            "mobile": mobile,
+            "roleIds": role_ids,
+            "status": 1,
+            "status2": True,
+            "storeType": 2,  # 门店权限
+            "companyId": company_id,
+            "companyId2": [],
+            "storeId": store_id,
+            "storeId2": [],
+            "storeIds": [company_id, store_id]
         }
         return self.request(api_name, data, method="POST")
 
@@ -53,37 +93,6 @@ class auth(base):
         response = self.request(api_name, data, method="POST")
         # print(response)
         return self.response(response)
-
-    def updateDemo(self):
-        data = {
-            'logoUrl': "",
-            'storeCode': "",
-            'storeType': 0,
-            'address': "上海市浦东新区浦东南路2250号",
-            'province': "上海市",
-            'city': "上海市",
-            'area': "浦东新区",
-            'longitude': "123.51",
-            'latitude': "31.20",
-            'level': 2,
-            'managerMobile': "",
-            'managerName': "",
-            'name': "测试店（滨江）",
-            'parentId': 10269,
-            'type': 0,
-            'takeStatus': 0,
-            'accountId': None,
-            'regionValue': ["上海市", "上海市", "浦东新区"],
-        }
-        _id = 10270
-        self.update(_id, data)
-
-    def updateGPS(self, _id, lat, lng):
-        data = self.read(_id)
-        data = data.get("data")
-        data["longitude"] = lng
-        data["latitude"] = lat
-        self.update(data)
 
     def delete(self):
         pass
