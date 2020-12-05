@@ -13,12 +13,14 @@ class auth(base):
     def __init__(self, token):
         super().__init__(token)
 
-    def list(self, pageNum=1, pageSize=10):
+    def list(self, mobile=None,pageNum=1, pageSize=10):
         api_name = "manager/sysuser/list"
         data = {
             "pageNum": pageNum,
             "pageSize": pageSize,
         }
+        if mobile:
+            data["mobile"] = mobile
         return self.request(api_name, data)
 
     def role_list(self):
