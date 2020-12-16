@@ -12,26 +12,7 @@ import pandas as pd
 from loguru import logger
 
 
-token = "b681a8b6-e04c-4cae-b5a1-48cd7bfa14d8"
+token = "59beb8f8-137f-4c0f-a1ef-03d1fbe6ab35"
 a = auth(token)
-# s = store(token)
-# orgs = s.code2id()
-# store_info = orgs.get("X1316481")
-# company_id = store_info.get("company_id")
-# store_id = store_info.get("store_id")
-# # for role_info in a.list().get("data").get("dataList"):
-# #     print(role_info)
-
-# params = dict(
-#     name="任秋锴",
-#     mobile="13801587423",
-#     role_ids=[a.get_role_map().get("店长")],
-#     company_id=company_id,
-#     store_id=store_id,
-#     _id=21944,
-# )
-
-# response = a.update_store(**params)
-# logger.debug(response)
-response = a.list(mobile="13801587423")
-print(response)
+response = a.update_status(_id="21844", status=1)
+logger.info(response)

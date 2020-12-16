@@ -13,7 +13,7 @@ class auth(base):
     def __init__(self, token):
         super().__init__(token)
 
-    def list(self, mobile=None,pageNum=1, pageSize=10):
+    def list(self, mobile=None, pageNum=1, pageSize=10):
         api_name = "manager/sysuser/list"
         data = {
             "pageNum": pageNum,
@@ -123,11 +123,17 @@ class auth(base):
     def delete(self):
         pass
 
-    def updateUserAuth(self, data):
-        api_name = "manager/sysuser/update"
+    def update_status(self, _id, status):
+        """
+        status:1开启0关闭
+        """
+        api_name = "manager/sysuser/updatestatus"
+        data = {"status": status, "id": _id}
         response = self.request(api_name, data, method="POST")
-        print(response)
         return self.response(response)
+
+    def updateUserAuth(self, data):
+        return self.update(data)
 
     def updateUserAuthDemo(self, companyId):
         data = {
@@ -138,7 +144,7 @@ class auth(base):
             "storeId": "", "storeId2": [], "id": 13160, "storeIds": [companyId],
             "status": 1, "type": None, "corpId": None, "isAdmin": 0
         }
-        (self.updateUserAuth(data))
+        (self.update(data))
 
     def get_role_map(self):
         role_map = {}

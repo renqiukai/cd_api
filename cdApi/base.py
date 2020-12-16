@@ -13,7 +13,7 @@ class base:
         self.token = token
         self.env = env
 
-    def request(self, api_name, data, method="GET"):
+    def request(self, api_name, data, method="GET", **kwargs):
         env_conf = {
             "dev": "apidev",
             "uat": "apiuat",
@@ -21,10 +21,10 @@ class base:
             "api": "api",
         }
         host_name = f"http://{env_conf[self.env]}.icaodong.com/"
-        headers = {
-            "token": self.token
-        }
+        headers = kwargs.get("headers", {})
+        headers["token"] = self.token
         url = f"{host_name}{api_name}"
+        response = requests.request(method=method, url=url, **kwargs)
         if method == "GET":
             response = requests.get(url, params=data, headers=headers)
         elif method == "POST":
