@@ -9,6 +9,7 @@
 '''
 
 from .base import base
+from loguru import logger
 
 
 class storeProduct(base):
@@ -70,3 +71,28 @@ class storeProduct(base):
                 for d in data["specificationList"]:
                     d["price"] = price
         return self.update(data)
+
+    def update_inventory(self, store_product_id, spec_inventory):
+        """
+        spec_inventory = {spec_code:inventory}
+        """
+        data = self.read(store_product_id)
+        data = data.get("data")
+        if data:
+            update_flag = False
+            for d in data["specificationList"]:
+                inventory = spec_inventory.get(d["specCode"])
+                if inventory:
+                    if d["inventory"] != inventory:
+                        update_flag = True
+                        spec_inventory[f"{d['specCode']}_raw"] = d["inventory"]
+                        d["inventory"] = inventory
+            if update_flag:
+                logger.debug(spec_inventory)
+                return self.update(data)
+            else:
+                logger.success(
+                    {"msg": "不需要更新库存", "store_product_id": store_product_id})
+        else:
+            logger.error(
+                {"msg": "更新商品库存失败", "store_product_id": store_product_id})
