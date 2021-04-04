@@ -38,8 +38,8 @@ class Token:
 
 
 if __name__ == "__main__":
-    client_id = "e2a07b0a-b12a-4a2b-96d6-0b9434916e5d1"
-    client_secret = "e2a07b0a-b12a-4a2b-96d6-0b9434916e5d1"
+    client_id = "6c25bd50-66d5-11eb-9f09-86d2306cf5d2"
+    client_secret = "FKNUHEGENFZKVCAJSRGFZUWLMSAWBTFMFNFZWCOLNGXQPQBMHQ"
     grant_type = "client_credentials"
     t = Token()
     t.get(client_id, client_secret, grant_type)

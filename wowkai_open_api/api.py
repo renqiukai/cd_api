@@ -2,13 +2,9 @@
 接口用于中间层和wowkai平台打通。
 """
 
-from logging import log
-from pymysql import DATETIME
 import requests
-from requests.models import Response
 from loguru import logger
 import time
-import json
 
 
 class tokenFail(BaseException):
