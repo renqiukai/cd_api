@@ -10,32 +10,22 @@ import time
 from loguru import logger
 
 
-class order(base):
+class coupon(base):
     def __init__(self, token):
         super().__init__(token)
 
     def list(self,
-             pay_stauts="PAY_NO",
-             member_phone=None,
-             branch_company_codes=None,
-             begin_time="2021-4-9 00:00:00",
-             end_time="2021-4-9 23:59:59",
-             page=1, page_size=10):
+             data_type=1,
+             member_phone=None):
             # https://opendoc.icaodong.com/2020/02/27/adapter-caodong/#No-3-1-%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8
-            # pay_stauts:PAY_NO-未付款 PAY_FINISH-已付 REFUND_ALL-全额退款
+            # data_type:1-会员优惠券 2-门店优惠券
         data = {
-            "method": "cd.trade.list.get",
+            "method": "cd.coupon.list.get",
             "time": self.time,
-            "pay_stauts": pay_stauts,
-            "begin_time": begin_time,
-            "end_time": end_time,
-            "page": page,
-            "page_size": page_size,
+            "data_type": data_type,
         }
         if member_phone:
             data["member_phone"] = member_phone
-        if branch_company_codes:
-            data["branch_company_codes"] = branch_company_codes
         # logger.debug(data)
         return self.request(method="POST", json=data)
 
