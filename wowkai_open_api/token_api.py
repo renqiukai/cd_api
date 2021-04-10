@@ -16,7 +16,8 @@ class Token:
     def __init__(self):
         pass
 
-    def get(self, client_id, client_secret, grant_type, scope="all"):
+    def get(self, client_id, client_secret,
+            grant_type="client_credentials", scope="all"):
         data = {
             "client_id": client_id,
             "client_secret": client_secret,
@@ -28,12 +29,12 @@ class Token:
         logger.debug(response)
         if response.status_code == 200:
             response_json = response.json()
-            status = response_json.get('status')
+            status_code = response_json.get('status_code')
             logger.debug(data)
             logger.debug(response_json)
-            if status == 200:
-                token = response_json.get("data").get("token")
-                logger.debug(f"token is {token}")
+            if status_code == 200:
+                token = response_json.get("data").get("access_token")
+                logger.debug(f"access_token is {token}")
                 return token
 
 

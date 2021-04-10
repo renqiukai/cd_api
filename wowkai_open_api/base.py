@@ -6,11 +6,13 @@
 '''
 import requests
 from loguru import logger
+import time
 
 
 class base:
     def __init__(self, token):
         self.token = token
+        self.time = str(int(time.time()))
 
     def request(self, method="GET", **kwargs):
         api_address = f"https://api.wowkai.cn/adapter"
@@ -19,12 +21,13 @@ class base:
         }
         kwargs["headers"] = headers
         response = requests.request(method=method, url=api_address, **kwargs)
+        # logger.debug(response.json())
         if response.status_code == 200:
             return self.response(response.json())
 
     def response(self, response_json):
-        status = response_json.get("status")
-        if status == 200:
+        status_code = response_json.get("status_code")
+        if status_code == 200:
             return response_json.get("data")
         else:
-            print(response_json)
+            logger.error(response_json)

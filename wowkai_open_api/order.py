@@ -6,54 +6,35 @@
 '''
 
 from .base import base
+import time
+from loguru import logger
 
 
 class order(base):
     def __init__(self, token):
         super().__init__(token)
 
-    def list(self, page=1, page_size=10):
+    def list(self,
+             pay_stauts="PAY_NO",
+             member_phone=None,
+             branch_company_codes=None,
+             begin_time="2021-4-9 00:00:00",
+             end_time="2021-4-9 23:59:59",
+             page=1, page_size=10):
+            # https://opendoc.icaodong.com/2020/02/27/adapter-caodong/#No-3-1-%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8
+            # pay_stauts:PAY_NO-未付款 PAY_FINISH-已付 REFUND_ALL-全额退款
         data = {
             "method": "cd.trade.list.get",
-            "time": time,
+            "time": self.time,
             "pay_stauts": pay_stauts,
-            "branch_company_codes": branch_company_codes,
-            "member_phone": member_phone,
             "begin_time": begin_time,
             "end_time": end_time,
             "page": page,
             "page_size": page_size,
         }
-        return self.request(json=data)
-
-    def sync(self, order_code):
-        # 向客户同步销售订单
-        api_name = "manager/order/order_invoice"
-        data = {"orderCodes": order_code}
-        return self.request(api_name, data, method="POST")
-
-    def syncReturn(self, order_code, type=None):
-        # 向客户同步售后订单
-        api_name = "manager/order/order_invoice"
-        data = {"returnCodes": order_code}
-        if type:
-            data["type"] = type
-        return self.request(api_name, data, method="POST")
-
-    def read(self, order_code):
-        api_name = "manager/order/info"
-        data = {
-            "orderCode": order_code,
-        }
-        response = self.request(api_name, data, method="GET")
-        return response
-
-    def bind_order_emp(self, order_code, emp_id):
-        # 订单绑定导购方法
-        api_name = "manager/order/bind_order_emp"
-        data = {
-            "orderCode": order_code,
-            "empId": emp_id
-        }
-        response = self.request(api_name, data, method="POST")
-        return self.response(response)
+        if member_phone:
+            data["member_phone"] = member_phone
+        if branch_company_codes:
+            data["branch_company_codes"] = branch_company_codes
+        # logger.debug(data)
+        return self.request(method="POST", json=data)

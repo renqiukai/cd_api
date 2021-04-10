@@ -20,5 +20,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
-    install_requires=["requests"]  # 这个项目需要的第三方库
+    install_requires=["requests","loguru"]  # 这个项目需要的第三方库
 )
