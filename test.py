@@ -8,6 +8,7 @@ from cdApi.product import product
 from cdApi.user import user
 from cdApi.store import store
 from cdApi.auth import auth
+from cdApi.token_api import
 import pandas as pd
 from loguru import logger
 from wowkai_open_api.order import order
@@ -23,8 +24,8 @@ from wowkai_open_api.token_api import Token
 
 
 token = Token().get(**{
-    "client_id": "dcba689c-919a-11ea-896d-02425e922344",
-    "client_secret": "DPRBGOHEOHNDTXQBFRAYPUTDZGTJQLAFSYFUKNYTTWGFMKKA",
+    "client_id": "37600e6c-e102-40fd-9fb2-1b857111444b",
+    "client_secret": "JCXOONFPEFOEJHXCOPUGGOAOXBAXDSBFKUSTPVDVNRNVIKPPPC",
 }
 )
 
