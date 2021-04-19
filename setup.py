@@ -6,7 +6,7 @@
 
 from setuptools import setup, find_packages  # 这个包没有的可以pip一下
 # import rqk_cd_api
-version = "1.1.12"
+version = "1.1.13"
 setup(
     name="cd_api",  # 这里是pip项目发布的名称
     version=version,  # 版本号，数值大的会优先被pip

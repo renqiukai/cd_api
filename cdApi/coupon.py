@@ -6,9 +6,9 @@
 '''
 
 
-
-
 from .base import base
+
+
 class coupon(base):
     def __init__(self, token):
         super().__init__(token)
@@ -55,6 +55,20 @@ class coupon(base):
                 {"id": 1290, "type": 0, "parentId": 1289}
             ],
         }
+        return self.update(data)
+
+    def update_product_list(self, _id, product_id_list: list = []):
+        """更新优惠券商品列表
+
+        Args:
+            _id (int): 优惠券ID
+            product_list (list, optional): 商品列表，支持商品编码，列表保存. Defaults to [].
+
+        Returns:
+            response: 返回是否成功标志
+        """
+        data = self.read(_id)
+        data["productId"] = product_id_list
         return self.update(data)
 
     def delete(self, _id):

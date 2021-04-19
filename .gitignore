@@ -2,3 +2,4 @@
 .vscode/*
 *.pyc
 settings.json
+test*
