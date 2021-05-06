@@ -88,3 +88,29 @@ class product(base):
 
     def delete(self):
         pass
+
+    def add_storeproduct(self, data):
+        url = "manager/product/addstoreproduct"
+        return self.request(url, data, method="POST")
+
+    def add_storeproduct_by_none(self, data):
+        """仅同步商品不选择任何同步信息
+
+        Args:
+            data ([type]): [description]
+
+        Returns:
+            [type]: [description]
+        """
+        url = "manager/product/addstoreproduct"
+        data = {
+            "pids": [95695],
+            "mark": 2,
+            "companyIds": [81],
+            "expressFree": 0,
+            "isVip": 0,
+            "inventory": 0,
+            "shareTotal": 0,
+            "price": 0
+        }
+        return self.add_storeproduct(data)
