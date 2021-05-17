@@ -9,6 +9,7 @@ import time
 import uuid
 from urllib import request
 from loguru import logger
+import sqlite3
 
 
 class Token:
@@ -32,7 +33,7 @@ class Token:
         return token
 
     def get_info(self, client_id, client_secret,
-            grant_type="client_credentials", scope="all"):
+                 grant_type="client_credentials", scope="all"):
         data = {
             "client_id": client_id,
             "client_secret": client_secret,
